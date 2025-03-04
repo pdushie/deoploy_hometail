@@ -47,7 +47,7 @@ const Navbar = () => {
             </div>
             <div className="flex gap-6 items-center max-lg:hidden">
               <Link href="/login" className="link link-hover">
-                Login
+                Login/Signup
               </Link>
               <Link href="/login">
                 <button
