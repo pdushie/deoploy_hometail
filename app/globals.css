@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+}
+@config "../tailwind.config.js";
+
+html {
+  scroll-behavior: smooth;
+}
