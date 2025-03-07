@@ -2,9 +2,10 @@ import NextAuth, { CredentialsSignin } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import AppleProvider from "next-auth/providers/apple";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { User } from "@/models/User";
-import connectToDB from "@/utils/db";
+import { PrismaClient } from "@prisma/client";
 import bcryptjs from "bcryptjs";
+
+const prisma = new PrismaClient();
 
 class MissingCredentialsError extends CredentialsSignin {
   code = "MissingCredentials";
@@ -12,10 +13,6 @@ class MissingCredentialsError extends CredentialsSignin {
 
 class UserNotFoundError extends CredentialsSignin {
   code = "UserNotFound";
-}
-
-class EmailNotVerifiedError extends CredentialsSignin {
-  code = "EmailNotVerified";
 }
 
 class InvalidPasswordError extends CredentialsSignin {
@@ -33,12 +30,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing email or password.");
+          throw new MissingCredentialsError();
         }
 
-        await connectToDB();
         try {
-          const user = await User.findOne({ email: credentials.email });
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email },
+          });
 
           if (!user) {
             throw new UserNotFoundError();
@@ -53,12 +51,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new InvalidPasswordError();
           }
 
-          if (!user.isVerified) {
-            throw new EmailNotVerifiedError();
-          }
-
           return {
-            id: user._id.toString(), // Ensure it's always the MongoDB ID
+            id: user.id,
             email: user.email,
             name: user.name,
             plus: user.plus,
@@ -90,21 +84,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return true;
       }
       if (account?.provider === "google" || account?.provider === "apple") {
-        await connectToDB();
         try {
-          let existingUser = await User.findOne({ email: user.email });
+          let existingUser = await prisma.user.findUnique({
+            where: { email: user.email },
+          });
 
           if (!existingUser) {
-            // Fix: Use Google/Apple name if available
-            existingUser = await new User({
-              email: user.email,
-              plus: false,
-              name: user.name || "",
-              googleId: account.provider === "google" ? user.id : undefined,
-            }).save();
+            existingUser = await prisma.user.create({
+              data: {
+                email: user.email,
+                plus: false,
+                name: user.name || "",
+                googleId: account.provider === "google" ? user.id : undefined,
+              },
+            });
           }
-          user.id = existingUser._id.toString();
-          // Fix: Preserve name if it exists in DB, else use Google/Apple name
+          user.id = existingUser.id;
           user.plus = existingUser.plus;
           user.name = existingUser.name || user.name;
 
@@ -120,7 +115,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (user) {
         return {
           ...token,
-          id: user.id, // Always use MongoDB ID
+          id: user.id,
           email: user.email,
           name: user.name,
           plus: user.plus,
@@ -145,7 +140,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     maxAge: 60 * 60,
   },
   pages: {
-    signIn: "/login", // Redirect errors to login page
-    error: "/login", // Redirect errors to login page
+    signIn: "/login",
+    error: "/login",
   },
 });
