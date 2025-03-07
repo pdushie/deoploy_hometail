@@ -1,23 +1,16 @@
 "use client";
-
-import NProgress from "nprogress";
+ 
 import ThemeSwitch from "./ThemeSwitch";
 import { useState } from "react";
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
 import { FaFileMedical } from "react-icons/fa";
-
+ 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { data: session } = useSession();
-  const path = usePathname();
-
+ 
   return (
     <nav
-      className={`relative z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 light-text dark-text text-lg font-semibold ${
-        path === "/" && "absolute"
-      } ${path === "/results" && ""}`}
+      className={`relative z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 light-text dark-text text-lg font-semibold`}
     >
       <div className="flex w-full justify-between items-center">
         <Link
@@ -27,66 +20,35 @@ const Navbar = () => {
           <FaFileMedical className="text-3xl mr-2 text-blue-500" />
           HomeTail
         </Link>
-
+ 
         {/* Desktop Navigation */}
-        {!session ? (
-          <>
-            <div className="flex gap-16 items-center max-lg:hidden">
-              <Link href="#About" className="link link-hover">
-                About
-              </Link>
-              <Link href="#Features" className="link link-hover">
-                Features
-              </Link>
-              <Link href="#FAQ" className="link link-hover">
-                FAQ
-              </Link>
-              <Link href="#Pricing" className="link link-hover">
-                Pricing
-              </Link>
-            </div>
-            <div className="flex gap-6 items-center max-lg:hidden">
-              <Link href="/login" className="link link-hover">
-                Login
-              </Link>
-              <Link href="/login">
-                <button
-                  type="button"
-                  className="btn btn-primary text-base max-lg:hidden"
-                >
-                  Get Started
-                </button>
-              </Link>
-              <ThemeSwitch />
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="flex gap-16 items-center max-lg:hidden">
-              <Link href="/dashboard" className="link link-hover">
-                Dashboard
-              </Link>
-              <Link href="/subscribe" className="link link-hover">
-                Subscribe
-              </Link>
-              <span>{session.user?.email}</span>
-              <button
-                type="button"
-                className="btn btn-primary text-base text-black dark:text-white"
-                onClick={() => {
-                  NProgress.start();
-                  localStorage.clear(); // Clear the specific item from local storage
-                  signOut({ callbackUrl: "/" }); // Optional: redirect after sign out
-                  NProgress.done();
-                }}
-              >
-                Logout
-              </button>
-              <ThemeSwitch />
-            </div>
-          </>
-        )}
-
+ 
+        <div className="flex gap-16 items-center max-lg:hidden">
+          <Link href="#About" className="link link-hover">
+            About Us
+          </Link>
+          <Link href="#FindPet" className="link link-hover">
+            Find a pet
+          </Link>
+          <Link href="#ListPet" className="link link-hover">
+            List a pet
+          </Link>
+          <Link href="#Faqs" className="link link-hover">
+            FAQs
+          </Link>
+        </div>
+        <div className="flex gap-6 items-center max-lg:hidden">
+          <Link href="/login">
+            <button
+              type="button"
+              className="btn btn-primary text-base max-lg:hidden"
+            >
+              Login/ Register
+            </button>
+          </Link>
+          <ThemeSwitch />
+        </div>
+ 
         {/* Mobile Hamburger Button */}
         <div
           className={`${
@@ -120,7 +82,7 @@ const Navbar = () => {
           </label>
         </div>
       </div>
-
+ 
       {/* Mobile Menu */}
       <div
         className={`lg:hidden fixed w-4/5 z-40 top-0 right-0 h-full bg-white dark:bg-[#1D232A] flex-col p-5 border-gray-400 border-l transform transition-transform duration-300 ${
@@ -131,84 +93,27 @@ const Navbar = () => {
           <ThemeSwitch />
         </div>
         <div className="flex flex-col justify-end gap-8 pt-24 light-text dark-text">
-          {!session ? (
-            <>
-              <Link
-                href="/login"
-                className="flex justify-end py-2 pr-4 text-lg"
-              >
-                Login
-              </Link>
-              <Link
-                href="/login"
-                className="flex justify-end py-2 pr-4 text-lg"
-              >
-                <button type="button" className="btn btn-primary text-lg">
-                  Get Started
-                </button>
-              </Link>
-              <Link
-                href="#About"
-                className="flex justify-end py-2 pr-4 text-lg"
-              >
-                About
-              </Link>
-              <Link
-                href="#Features"
-                className="flex justify-end py-2 pr-4 text-lg"
-              >
-                Features
-              </Link>
-              <Link href="#FAQ" className="flex justify-end py-2 pr-4 text-lg">
-                FAQ
-              </Link>
-              <Link
-                href="#Pricing"
-                className="flex justify-end py-2 pr-4 text-lg"
-              >
-                Pricing
-              </Link>
-            </>
-          ) : (
-            <>
-              {path !== "/assessment" && path !== "/" && (
-                <Link href="/" className="flex justify-end py-2 pr-4 text-lg">
-                  Home
-                </Link>
-              )}
-              <Link
-                href="/dashboard"
-                className="flex justify-end py-2 pr-4 text-lg"
-              >
-                Dashboard
-              </Link>
-              <Link
-                href="/subscribe"
-                className="flex justify-end py-2 pr-4 text-lg"
-              >
-                Subscribe
-              </Link>
-              <span className="flex justify-end py-2 pr-4 text-lg">
-                {session.user?.email}
-              </span>
-              <button
-                type="button"
-                className="btn btn-primary self-end mr-4 text-lg"
-                onClick={() => {
-                  NProgress.start();
-                  localStorage.clear(); // Clear the specific item from local storage
-                  signOut({ callbackUrl: "/" }); // Optional: redirect after sign out
-                  NProgress.done();
-                }}
-              >
-                Logout
-              </button>
-            </>
-          )}
+          <Link href="/login" className="flex justify-end py-2 pr-4 text-lg">
+            <button type="button" className="btn btn-primary text-lg">
+              Login/ Register
+            </button>
+          </Link>
+          <Link href="#About" className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500">
+            About Us
+          </Link>
+          <Link href="#FindPet" className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500">
+            Find a pet
+          </Link>
+          <Link href="#ListPet" className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500">
+            List a pet
+          </Link>
+          <Link href="#Faqs" className="flex justify-end py-2 pr-4 text-lg hover:bg-blue-500">
+            FAQs
+          </Link>
         </div>
       </div>
     </nav>
   );
 };
-
+ 
 export default Navbar;
