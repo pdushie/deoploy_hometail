@@ -1,7 +1,7 @@
 const HowItWorks = () => {
   return (
     <section
-      id="HowItWorks"
+      id="Values"
       className="w-full flex justify-center pt-32 max-md:pt-16"
     >
       <div className="flex flex-col w-full max-lg:w-4/5">
@@ -18,7 +18,7 @@ const HowItWorks = () => {
           {/* Card 1 */}
           <div className="flex flex-col gap-5 items-center w-1/3 max-md:w-full bg-white shadow-md rounded-lg p-6">
             <img
-              src="/catDog.jpg"  // This references the image in the 'public' folder
+              src="/catDog.jpg"  
               alt="Browse Pets"
               className="w-full h-64 object-cover rounded-md"
             />
@@ -31,7 +31,7 @@ const HowItWorks = () => {
           {/* Card 2 */}
           <div className="flex flex-col gap-5 items-center w-1/3 max-md:w-full bg-white shadow-md rounded-lg p-6">
             <img
-              src="/connect.jpg"  // Reuse the same image or add a different one here
+              src="/connect.jpg"  
               alt="Connect with Owners"
               className="w-full h-64 object-cover rounded-md"
             />
@@ -44,7 +44,7 @@ const HowItWorks = () => {
           {/* Card 3 */}
           <div className="flex flex-col gap-5 items-center w-1/3 max-md:w-full bg-white shadow-md rounded-lg p-6">
             <img
-              src="/adoptpet.jpg"  // Reuse the same image or add a different one here
+              src="/adoptpet.jpg"  
               alt="Adopt Your New Pet"
               className="w-full h-64 object-cover rounded-md"
             />
