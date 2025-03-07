@@ -22,7 +22,7 @@ const Hero = () => {
         <h1 className="text-5xl max-md:text-4xl leading-tight font-bold text-white drop-shadow-lg">
         Find Your New Best Friend Today!
         </h1>
-        <p className="text-xl light-text dark-text drop-shadow-lg font-semibold">
+        <p className="text-xl light-text text-white drop-shadow-lg font-semibold">
         Your new best friend is just a click away
           <br />
           Browse and adopt today!
