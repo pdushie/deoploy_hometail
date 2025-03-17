@@ -30,9 +30,7 @@ const LoginForm = ({ setLoading, loading, setError }) => {
           case "UserNotFound":
             setError("No account found with this email.");
             break;
-          case "EmailNotVerified":
-            setError("Please verify your email before logging in.");
-            break;
+
           case "InvalidPassword":
             setError("Invalid password. Try again.");
             break;
