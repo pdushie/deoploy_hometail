@@ -55,7 +55,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             id: user.id,
             email: user.email,
             name: user.name,
-            plus: user.plus,
+            isSubscribed: user.isSubscribed,
           };
         } catch (error) {
           console.log(error);
@@ -93,14 +93,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             existingUser = await prisma.user.create({
               data: {
                 email: user.email,
-                plus: false,
+                isSubscribed: false,
                 name: user.name || "",
-                googleId: account.provider === "google" ? user.id : undefined,
               },
             });
           }
           user.id = existingUser.id;
-          user.plus = existingUser.plus;
+          user.isSubscribed = existingUser.isSubscribed;
           user.name = existingUser.name || user.name;
 
           return true;
@@ -118,7 +117,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           id: user.id,
           email: user.email,
           name: user.name,
-          plus: user.plus,
+          isSubscribed: user.isSubscribed,
         };
       } else if (trigger === "update" && session) {
         token.name = session.name;
@@ -129,7 +128,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.id = token.id;
       session.user.email = token.email;
       session.user.name = token.name;
-      session.user.plus = token.plus;
+      session.user.isSubscribed = token.isSubscribed;
 
       return session;
     },
