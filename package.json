@@ -13,6 +13,7 @@
     "@react-email/render": "^1.0.1",
     "animate.css": "^4.1.1",
     "bcryptjs": "^2.4.3",
+    "lucide-react": "^0.482.0",
     "mongodb": "^6.9.0",
     "mongoose": "^8.5.4",
     "next": "^14.2.13",

@@ -6,7 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { FaFileMedical } from "react-icons/fa";
+import { FaPaw } from "react-icons/fa";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -24,7 +24,7 @@ const Navbar = () => {
           href="/"
           className="flex items-center font-semibold light-text dark-text text-2xl"
         >
-          <FaFileMedical className="text-3xl mr-2 text-blue-500" />
+          <FaPaw className="text-3xl mr-2 text-blue-500" />
           HomeTail
         </Link>
 
