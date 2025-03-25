@@ -13,8 +13,6 @@ export default function Home() {
         <KeyFeatures />
         <FAQ />
         <Pricing title={"Subscription"} width={"w-[350px]"} />
-        <Footer />
-        <Pricing title={"Pricing"} width={"w-[350px]"} />
       </div>
     </>
   );
