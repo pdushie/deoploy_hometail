@@ -31,7 +31,7 @@ const RegisterForm = ({ setSuccess, setError }) => {
       });
 
       if (res.status === 200) {
-        setSuccess("Account created successfully! Check your email to verify.");
+        setSuccess("Account created successfully! Please login.");
       } else if (res.status === 400) {
         setError("This email address is already in use.");
       }

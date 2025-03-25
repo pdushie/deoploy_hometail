@@ -30,9 +30,7 @@ const LoginForm = ({ setLoading, loading, setError }) => {
           case "UserNotFound":
             setError("No account found with this email.");
             break;
-          case "EmailNotVerified":
-            setError("Please verify your email before logging in.");
-            break;
+
           case "InvalidPassword":
             setError("Invalid password. Try again.");
             break;
@@ -43,7 +41,7 @@ const LoginForm = ({ setLoading, loading, setError }) => {
         setLoading({ loading: false, isEmailLoading: false });
       } else {
         // Redirect to the dashboard if login is successful
-        router.push("/dashboard/today");
+        router.push("/dashboard");
       }
     } catch (error) {
       setError("Error, try again");
