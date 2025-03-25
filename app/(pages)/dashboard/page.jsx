@@ -9,8 +9,10 @@ const Dashboard = () => {
 
   return (
     <>
-    <div className="text-2xl grid-cols-2">Your are logged in as: { session?.user?.name ?? 'Name not available'}</div>
-      <Sidebar />
+    <Sidebar />
+    <div className="text-2xl flex justify-center items-center">Your are logged in as: { session?.user?.name ?? 'Name not available'}</div>
+      
+      <div className="min-h-[100vh]"></div>
     </>
   )
 };
