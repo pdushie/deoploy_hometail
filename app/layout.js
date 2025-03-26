@@ -19,9 +19,11 @@ export default async function RootLayout({ children }) {
       <body className="bg-white dark:bg-[#1D232A]">
         <NextTopLoader />
         <SessionProvider session={session}>
+          <Theme>
           <Navbar />
-          <Theme>{children}</Theme>
+          {children}
           <Footer />
+          </Theme>
         </SessionProvider>
       </body>
     </html>
