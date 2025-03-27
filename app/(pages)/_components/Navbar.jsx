@@ -26,7 +26,7 @@ const Navbar = () => {
       <div className="flex w-full justify-between items-center">
         <Link
           href="/"
-          className="flex items-center font-semibold light-text dark-text text-2xl"
+          className="flex items-center font-semibold light-text dark-text text-2xl dark:text-white"
         >
           <FaPaw className="text-3xl mr-2 text-blue-500" />
           HomeTail
@@ -35,16 +35,16 @@ const Navbar = () => {
         {/* Desktop Navigation */}
 
         <div className="flex gap-16 items-center max-lg:hidden">
-          <Link href="#About" className="link link-hover">
+          <Link href="#About" className="link link-hover dark:text-white">
             About Us
           </Link>
-          <Link href="#FindPet" className="link link-hover">
+          <Link href="#FindPet" className="link link-hover dark:text-white">
             Find a pet
           </Link>
-          <Link href="#ListPet" className="link link-hover">
+          <Link href="#ListPet" className="link link-hover dark:text-white">
             List a pet
           </Link>
-          <Link href="#Faqs" className="link link-hover">
+          <Link href="#Faqs" className="link link-hover dark:text-white">
             FAQs
           </Link>
         </div>
