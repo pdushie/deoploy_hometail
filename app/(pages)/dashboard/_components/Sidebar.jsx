@@ -9,7 +9,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex">
+    <div className="flex bg-gray-100">
       {/* Sidebar */}
       <div
         // Conditional class based on isOpen 
@@ -37,7 +37,7 @@ const Sidebar = () => {
           </div>
           {/* Add more sidebar items here */}
           <div className="mt-4">
-            <Link href="#"
+            <Link href="/listdog"
               className="text-white 
                           hover:text-gray-300">
               List a Dog for Adoption
