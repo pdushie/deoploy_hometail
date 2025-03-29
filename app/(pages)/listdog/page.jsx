@@ -50,6 +50,18 @@ const ListDogForm = () => {
       <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-lg">
         <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">List a Dog for Adoption</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          {/* Dog's Name Input */}
+          <div>
+            <label className="block text-gray-700 font-medium">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={dogDetails.name}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
           
           {/* Breed Dropdown */}
           <div>
