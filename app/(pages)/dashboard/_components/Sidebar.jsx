@@ -29,7 +29,7 @@ const Sidebar = () => {
             </Link>
           </div>
           <div className="mt-4">
-            <Link href="#"
+            <Link href="/adoptdog"
               className="text-white 
                           hover:text-gray-300">
               Adopt a Dog
