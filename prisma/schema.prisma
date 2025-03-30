@@ -17,6 +17,11 @@ model User {
   priceId String?
 }
 
+model DogBreed {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  breed String?
+}
+
 
 
 

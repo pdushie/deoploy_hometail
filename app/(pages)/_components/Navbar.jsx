@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`relative z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 light-text dark-text text-lg font-semibold`}
+      className={`relative shadow-2xs z-50 flex w-full max-md:h-[90px] px-5 max-lg:px-0 items-center py-5 max-lg:pl-5 light-text dark-text text-lg font-semibold`}
     >
       <div className="flex w-full justify-between items-center">
         <Link
