@@ -3,7 +3,7 @@ name: Sync Code to Another Repo
 on:
   push:
     branches:
-      - main  # Change this if needed
+      - main  # Adjust this if needed
 
 jobs:
   sync_repo:
@@ -13,13 +13,18 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Push Code to Another Repo
+      - name: Push Code to Target Repo
         env:
+          GH_PAT: ${{ secrets.GH_PAT }}  # Personal Access Token stored in GitHub Secrets
+          SOURCE_REPO: "https://x-access-token:${{ secrets.GH_PAT }}@github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git"
           TARGET_REPO: "https://x-access-token:${{ secrets.GH_PAT }}@github.com/pdushie/deoploy_hometail.git"
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
 
-          git clone --bare https://github.com/your-username/your-source-repo.git source_repo
+          # Clone the source repo as a bare repo
+          git clone --bare "$SOURCE_REPO" source_repo
           cd source_repo
-          git push --mirror github.com/pdushie/deoploy_hometail.git
+
+          # Push all branches & tags to the target repo
+          git push --mirror "$TARGET_REPO"
