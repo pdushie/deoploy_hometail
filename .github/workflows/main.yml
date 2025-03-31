@@ -1,0 +1,30 @@
+name: Sync Fork with Upstream
+
+on:
+  schedule:
+    - cron: "0 */1 * * *"  # Runs every 1 hours (adjust as needed)
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Fork
+        uses: actions/checkout@v4
+
+      - name: Set Up Git User
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@github.com"
+
+      - name: Add Upstream & Fetch Latest Changes
+        run: |
+          git remote add upstream https://github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git || true
+          git fetch upstream
+
+      - name: Merge Upstream Changes into Main
+        run: |
+          git checkout main
+          git merge upstream/main --allow-unrelated-histories || true
+          git push origin main
