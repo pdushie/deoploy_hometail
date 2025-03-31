@@ -1,0 +1,25 @@
+name: Sync Code to Another Repo
+
+on:
+  push:
+    branches:
+      - main  # Change this if needed
+
+jobs:
+  sync_repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Push Code to Another Repo
+        env:
+          TARGET_REPO: "https://x-access-token:${{ secrets.GH_PAT }}@github.com/pdushie/deoploy_hometail.git"
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions@github.com"
+
+          git clone --bare https://github.com/your-username/your-source-repo.git source_repo
+          cd source_repo
+          git push --mirror github.com/pdushie/deoploy_hometail.git
