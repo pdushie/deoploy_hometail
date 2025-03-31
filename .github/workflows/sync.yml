@@ -3,8 +3,8 @@ name: Sync Code to Another Repo
 on:
   push:
     branches:
-      - main  # Runs on pushes to the main branch
-  workflow_dispatch:  # Allows manual trigger from GitHub Actions
+      - main
+  workflow_dispatch:
 
 jobs:
   sync_repo:
@@ -24,8 +24,9 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
           TARGET_REPO: "https://x-access-token:${{ secrets.GH_PAT }}@github.com/pdushie/deoploy_hometail.git"
         run: |
-          git clone --bare https://github.com/pdushie/webd5015-project-hometail.git source_repo
+          # Clone the correct source repository
+          git clone --bare https://github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git source_repo
           cd source_repo
 
-          # Push code to target repo
+          # Push all changes to the target repo
           git push --mirror "$TARGET_REPO"
