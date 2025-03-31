@@ -22,11 +22,12 @@ jobs:
       - name: Clone and Push to Target Repo
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
+          SOURCE_REPO: "https://x-access-token:${{ secrets.GH_PAT }}@github.com/pdushie/project-hometail.git"
           TARGET_REPO: "https://x-access-token:${{ secrets.GH_PAT }}@github.com/pdushie/deoploy_hometail.git"
         run: |
-          # Clone the correct source repository
-          git clone --bare https://github.com/NSCC-ITC-Winter2025-WEBD5015-700-MCa/webd5015-project-hometail.git source_repo
+          # Clone the source repository with authentication
+          git clone --bare "$SOURCE_REPO" source_repo
           cd source_repo
 
-          # Push all changes to the target repo
+          # Push all changes to the target repository
           git push --mirror "$TARGET_REPO"
