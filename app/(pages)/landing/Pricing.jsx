@@ -7,40 +7,40 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
-export const plans = [
-  {
-    link: "https://buy.stripe.com/cN26qR16F2UUe1G7sv",
-    priceId: "price_1Q8UhYHbTfdUSDfilKK7lqyt",
-    price: 9.99,
-    duration: "/month",
-  },
-  {
-    link: "https://buy.stripe.com/6oEbLb4iRanm2iY148",
-    priceId: "price_1Q8Ul0HbTfdUSDfisT1dNt3Z",
-    price: 99,
-    duration: "/year",
-  },
-];
-
-// export const plansTest = [
+// export const plans = [
 //   {
-//     link: "https://buy.stripe.com/test_dR6bKB9KA36i5Gg5kk",
-//     priceId: "price_1Q6xtyHbTfdUSDfiVTbqlxuT",
-//     price: 9.99,
+//     link: "https://buy.stripe.com/cN26qR16F2UUe1G7sv",
+//     priceId: "price_1Q8UhYHbTfdUSDfilKK7lqyt",
+//     price: 4.99,
 //     duration: "/month",
 //   },
 //   {
-//     link: "https://buy.stripe.com/test_5kA4i98GwgX8fgQeUV",
-//     priceId: "price_1Q6y1RHbTfdUSDfiONvUDLW2",
-//     price: 99,
+//     link: "https://buy.stripe.com/6oEbLb4iRanm2iY148",
+//     priceId: "price_1Q8Ul0HbTfdUSDfisT1dNt3Z",
+//     price: 44.99,
 //     duration: "/year",
 //   },
 // ];
 
+export const plansTest = [
+  {
+    link: "https://buy.stripe.com/test_eVa4i92i8dKW8Ss28c",
+    priceId: "price_1R7cRkHbTfdUSDfiFOUTIINI",
+    price: 4.99,
+    duration: "/month",
+  },
+  {
+    link: "https://buy.stripe.com/test_cN25md9KA9uGecM005",
+    priceId: "price_1R7cRkHbTfdUSDfim5RjYRvJ",
+    price: 44.99,
+    duration: "/year",
+  },
+];
+
 const Pricing = ({ title, width }) => {
   const { data: session, status: status } = useSession();
   const path = usePathname();
-  const [plan, setPlan] = useState(plans[0]);
+  const [plan, setPlan] = useState(plansTest[0]);
   const [isYearly, setIsYearly] = useState(false);
 
   const handlePricingToggle = (e) => {
@@ -65,8 +65,8 @@ const Pricing = ({ title, width }) => {
     },
     {
       name: "Premium Account",
-      priceMonthly: "9.99",
-      priceYearly: "99",
+      priceMonthly: "4.99",
+      priceYearly: "44.99",
       description: "Full access to pet adoption features.",
       features: [
         { text: "Browse pet listings", available: true },
@@ -105,7 +105,7 @@ const Pricing = ({ title, width }) => {
                     Free Account
                   </h2>
                   <p className="mb-8 light-text dark-text h-[60px]">
-                  {planTypes[0].description}
+                    {planTypes[0].description}
                   </p>
                   <div className="h-[120px]">
                     <div className="text-5xl font-bold mb-6 flex items-center justify-center">
@@ -120,8 +120,14 @@ const Pricing = ({ title, width }) => {
                   <ul className="text-left space-y-4 light-text dark-text">
                     {planTypes[0].features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-1">
-                        <span className={feature.available ? "text-green-400" : "text-red-400"}>
-                    {feature.available ? <ImCheckmark /> : <ImCross />}
+                        <span
+                          className={
+                            feature.available
+                              ? "text-green-400"
+                              : "text-red-400"
+                          }
+                        >
+                          {feature.available ? <ImCheckmark /> : <ImCross />}
                         </span>
                         {feature.text}
                       </li>
@@ -163,7 +169,7 @@ const Pricing = ({ title, width }) => {
                           checked={!isYearly}
                           onChange={handlePricingToggle}
                           className="radio checked:bg-blue-400"
-                          onClick={() => setPlan(plans[0])}
+                          onClick={() => setPlan(plansTest[0])}
                         />
                         <span className="text-sm">Monthly</span>
                       </label>
@@ -174,7 +180,7 @@ const Pricing = ({ title, width }) => {
                           checked={isYearly}
                           onChange={handlePricingToggle}
                           className="radio checked:bg-blue-400"
-                          onClick={() => setPlan(plans[1])}
+                          onClick={() => setPlan(plansTest[1])}
                         />
                         <span className="text-sm">Yearly</span>
                       </label>

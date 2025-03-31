@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
-const protectedRoutes = ["/dashboard", "/settings"];
+const protectedRoutes = ["/dashboard", "/settings", "/subscribe"];
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
