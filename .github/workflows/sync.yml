@@ -21,7 +21,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions@github.com"
 
-          git clone --bare https://github.com/your-username/webd5015-project-hometail.git source_repo
+          git clone --bare https://github.com/pdushie/project-hometail.git source_repo
           cd source_repo
 
           git push --mirror "$TARGET_REPO"
